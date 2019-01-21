@@ -1,0 +1,70 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class Person {
+public:
+	int Id;
+	string firstName, lastName;
+	void acceptData() {
+		cout << "Enter Person Id" << endl;
+		cin >> Id;
+		cout << "Enter First Name" << endl;
+		cin >> firstName;
+		cout << "Enter Last Name" << endl;
+		cin >> lastName;
+	}
+	/*void displayData() {
+		cout << "Id is :"<< Id;
+		cout << "FIrstName is :"<< firstName;
+		cout << "LastName is :"<< lastName;
+	}*/
+
+};
+class UG_Student : public Person {
+public:
+	string Ug_Course;
+	int UgFees, UgPercentage;
+	void acceptUgdata() {
+		cout << "Enter Ug_Course Name" << endl;
+		cin >> Ug_Course;
+		cout << "Enter UgFees" << endl;
+		cin >> UgFees;
+		cout << "Enter Ug Percentage" << endl;
+		cin >> UgPercentage;
+	}	
+};
+class Sports {
+public:
+	string sportName;
+	void assignSportName() {
+		cout << "Enter SportsName" << endl;
+		cin >> sportName;
+	}
+	void printSport() {
+		cout << sportName << endl;
+	}
+
+};
+class PGStudent : public UG_Student, public Sports {
+public:
+	string PG_Group;
+	int PG_Fees,PG_Percentage;
+	void acceptPGdAta() {
+		cout << "Enter PG Group" << endl;
+		cin >> PG_Group;
+		cout << "Enter PG Fees" << endl;
+		cin >> PG_Fees;
+		cout << "Enter PG Percentage" << endl;
+		cin >> PG_Percentage;
+	}
+	void displayStudent() {
+		cout << "Id is :" << Id;
+		cout << "FIrstName is :" << firstName;
+		cout << "LastName is :" << lastName;
+		cout << "Ug Course name is :" << Ug_Course;
+		cout << "UgFees is :" << UgFees;
+		cout << "UgPercentage is :" << UgPercentage;
+	}
+};
+
+	
