@@ -1,0 +1,344 @@
+#include<string>
+#include <iostream>
+#include"Person.h"
+#include<fstream>
+using namespace std;
+
+int main()
+{
+	string Ans;
+	int id, Ugfees,flag, Ugpercentage, Pgfees, Pgpercentage, choice, pos = 3, temp, searchId;
+	string fname;
+	string lname, UgCourse, sportsName, PgCourse;
+	
+
+	fstream fs,sam;
+	do
+	{
+		cout << "\n1.Press 1 to Add data\n2.Press 2 to display data\n3.Press 3 to search data\n4.Press 4 to update the data\n5.Press 5 to Delete the data\n6.Press 6 to Exit the data" << endl;
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::out);
+			do {
+				if (fs.is_open()) {
+					PGStudent PGstudent;
+					PGstudent.setPersonId();
+					PGstudent.setfirstName();
+					PGstudent.setlastName();
+					PGstudent.setUg_Course();
+					PGstudent.setUgFees();
+					PGstudent.setUgPercentage();
+					PGstudent.setsportName();
+					PGstudent.setPG_Course();
+					PGstudent.setPG_Fees();
+					PGstudent.setPG_Percentage();
+					fs.write((char*)&PGstudent, sizeof(PGstudent));
+					cout << "hello" << endl;;
+				}
+				else {
+					cout << "Error1" << endl;
+				}
+				cout << "Do you want to add more data [y or n] " << endl;
+				cin >> Ans;
+			} while (Ans == "y");
+
+			fs.close();
+			break;
+		case 2:fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::in);
+	do
+	{
+		PGStudent PGstudent2;
+		if (fs.is_open()) {
+
+			fs.read((char*)&PGstudent2, sizeof(PGstudent2));
+			id = PGstudent2.getPersonId();
+			fname = PGstudent2.getfirstName();
+			lname = PGstudent2.getlastName();
+			UgCourse = PGstudent2.getUgCourse();
+			Ugfees = PGstudent2.getUgFees();
+			Ugpercentage = PGstudent2.getUgPercentage();
+			sportsName = PGstudent2.getsportName();
+			PgCourse = PGstudent2.getPG_Course();
+			Pgfees = PGstudent2.getPG_Fees();
+			Pgpercentage = PGstudent2.getPG_Percentage();
+
+			cout << "\nPerson Id is: " << id << endl;
+			cout << "Person First Name is: " << fname << endl;
+			cout << "Person Last Name is: " << lname << endl;
+			cout << "Ug Course Name is: " << UgCourse << endl;
+			cout << "Ug Course Fees is: " << Ugfees << endl;
+			cout << "Ug Percentage is: " << Ugpercentage << endl;
+			cout << "Sport Name is : " << sportsName << endl;
+			cout << "Pg Course is: " << PgCourse << endl;
+			cout << "Pg Course  Fees is: " << Pgfees << endl;
+			cout << "Pg Percentage is: " << Pgpercentage << endl;
+
+
+		}
+		else {
+			cout << "Error2" << endl;
+		}
+	} while (!fs.eof());
+	
+	fs.close();
+	break;
+		case 3:
+			cout << "Enter Id to serach " << endl;
+			cin >> searchId;
+		fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::in);
+			do
+			{
+				PGStudent PGstudent2;
+				if (fs.is_open()) {
+
+					fs.read((char*)&PGstudent2, sizeof(PGstudent2));
+					if (PGstudent2.getPersonId() == searchId) {
+						id = PGstudent2.getPersonId();
+						fname = PGstudent2.getfirstName();
+						lname = PGstudent2.getlastName();
+						UgCourse = PGstudent2.getUgCourse();
+						Ugfees = PGstudent2.getUgFees();
+						Ugpercentage = PGstudent2.getUgPercentage();
+						sportsName = PGstudent2.getsportName();
+						PgCourse = PGstudent2.getPG_Course();
+						Pgfees = PGstudent2.getPG_Fees();
+						Pgpercentage = PGstudent2.getPG_Percentage();
+
+						cout << "\nPerson Id is: " << id << endl;
+						cout << "Person First Name is: " << fname << endl;
+						cout << "Person Last Name is: " << lname << endl;
+						cout << "Ug Course Name is: " << UgCourse << endl;
+						cout << "Ug Course Fees is: " << Ugfees << endl;
+						cout << "Ug Percentage is: " << Ugpercentage << endl;
+						cout << "Sport Name is : " << sportsName << endl;
+						cout << "Pg Course is: " << PgCourse << endl;
+						cout << "Pg Course  Fees is: " << Pgfees << endl;
+						cout << "Pg Percentage is: " << Pgpercentage << endl;
+
+					}
+					
+				}
+				else {
+					cout << "Error2" << endl;
+				}
+			} while (!fs.eof());
+
+			fs.close();
+			break;
+		case 4:
+			cout << "Enter Id to Update " << endl;
+			cin >> searchId;
+			fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::in);
+			sam.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", ios::out);
+			do
+			{
+				PGStudent PGstudent4, samplestd;
+				if (fs.is_open()) {
+					fs.read((char*)&PGstudent4, sizeof(PGstudent4));
+					if (PGstudent4.getPersonId() == searchId) {
+						PGstudent4.setfirstName();
+						PGstudent4.setlastName();
+						samplestd = PGstudent4;
+						if (sam.is_open()) {
+							sam.write((char*)&samplestd, sizeof(samplestd));
+
+						}
+					}
+					else {
+						samplestd = PGstudent4;
+						if (sam.is_open()) {
+							sam.write((char*)&samplestd, sizeof(samplestd));
+
+						}
+					}
+
+				}
+				else {
+					cout << "Error2" << endl;
+				}
+			} while (!fs.eof());
+
+			fs.close();
+			sam.close();
+			remove("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			rename("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", "D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			break;
+		case 5:
+			cout << "Enter Id to delete " << endl;
+			cin >> searchId;
+			fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::in);
+			sam.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", ios::out);
+			do
+			{
+				PGStudent PGstudent4,samplestd;
+				if (fs.is_open()) {
+					fs.read((char*)&PGstudent4, sizeof(PGstudent4));
+					if (PGstudent4.getPersonId() != searchId) {
+						samplestd = PGstudent4;
+						if (sam.is_open()) {
+							sam.write((char*)&samplestd, sizeof(samplestd));
+
+						}
+					}
+					
+				}
+				else {
+					cout << "Error2" << endl;
+				}
+			} while (!fs.eof());
+			
+			fs.close();
+			sam.close();
+			remove("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			rename("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", "D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			break;
+		
+
+		default:
+			break;
+		}
+
+	} while (choice<6);
+  
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  
+  #include<iostream>
+#include<string>
+using namespace std;
+class Person {
+public:
+	int PersonId;
+	char firstName[20], lastName[20];
+	/*void acceptData() {
+		cout << "Enter Person Id" << endl;
+		cin >> Id;
+		cout << "Enter First Name" << endl;
+		cin >> firstName;
+		cout << "Enter Last Name" << endl;
+		cin >> lastName;
+	}*/
+	/*void displayData() {
+		cout << "Id8 is :"<< Id;
+		cout << "FIrstName is :"<< firstName;
+		cout << "LastName is :"<< lastName;
+	}*/
+	void setPersonId() {
+		cout << "Enter Person Id" << endl;
+		cin >> PersonId;
+	}
+	int getPersonId() {
+		return PersonId;
+	}
+	void setfirstName() {
+		cout << "Enter First Name" << endl;
+		cin >> firstName;
+	}
+	string getfirstName() {
+		return firstName;
+	}
+	void setlastName() {
+		cout << "Enter Last Name" << endl;
+		cin >> lastName;
+	}
+	string getlastName() {
+		return lastName;
+	}
+
+};
+class UG_Student : public Person {
+public:
+	char Ug_Course[20];
+	int UgFees, UgPercentage;
+	/*void acceptUgdata() {
+		cout << "Enter Ug_Course Name" << endl;
+		cin >> Ug_Course;
+		cout << "Enter UgFees" << endl;
+		cin >> UgFees;
+		cout << "Enter Ug Percentage" << endl;
+		cin >> UgPercentage;
+	}	*/
+	void setUg_Course() {
+		cout << "Enter Ug_Course" << endl;
+		cin >> Ug_Course;
+	}
+	string getUgCourse() {
+		return Ug_Course;
+	}
+
+	void setUgFees() {
+		cout << "Enter UgFees" << endl;
+		cin >> UgFees;
+	}
+	int getUgFees() {
+		return UgFees;
+	}
+	void setUgPercentage() {
+		cout << "Enter UgPercentage" << endl;
+		cin >> UgPercentage;
+	}
+	int getUgPercentage() {
+		return UgPercentage;
+	}
+};
+class Sports {
+public:
+	char sportName[20];
+	void setsportName() {
+		cout << "Enter sportName" << endl;
+		cin >> sportName;
+	}
+	string getsportName() {
+		return sportName;
+	}
+
+};
+class PGStudent : public UG_Student, public Sports {
+public:
+	char PG_Course[20];
+	int PG_Fees, PG_Percentage;
+	/*void acceptPGdAta() {
+		cout << "Enter PG Group" << endl;
+		cin >> PG_Group;
+		cout << "Enter PG Fees" << endl;
+		cin >> PG_Fees;
+		cout << "Enter PG Percentage" << endl;
+		cin >> PG_Percentage;
+	}
+	void displayStudent() {
+		cout << "Id is :" << Id;
+		cout << "FIrstName is :" << firstName;
+		cout << "LastName is :" << lastName;
+		cout << "Ug Course name is :" << Ug_Course;
+		cout << "UgFees is :" << UgFees;
+		cout << "UgPercentage is :" << UgPercentage;
+	}*/
+	void setPG_Course() {
+		cout << "Enter PG_Course" << endl;
+		cin >> PG_Course;
+	}
+	string getPG_Course() {
+		return PG_Course;
+	}
+
+	void setPG_Fees() {
+		cout << "Enter PG_Fees" << endl;
+		cin >> PG_Fees;
+	}
+	int getPG_Fees() {
+		return PG_Fees;
+	}
+	void setPG_Percentage() {
+		cout << "Enter PG_Percentage" << endl;
+		cin >> PG_Percentage;
+	}
+	int getPG_Percentage() {
+		return PG_Percentage;
+	}
+};
+
+
+  
+  
