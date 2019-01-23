@@ -1,0 +1,67 @@
+case 4:
+			cout << "Enter Id to Update " << endl;
+			cin >> searchId;
+			fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::in);
+			sam.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", ios::out);
+			do
+			{
+				PGStudent PGstudent4, samplestd;
+				if (fs.is_open()) {
+					fs.read((char*)&PGstudent4, sizeof(PGstudent4));
+					if (PGstudent4.getPersonId() == searchId) {
+						PGstudent4.setfirstName();
+						PGstudent4.setlastName();
+						samplestd = PGstudent4;
+						if (sam.is_open()) {
+							sam.write((char*)&samplestd, sizeof(samplestd));
+
+						}
+					}
+					else {
+						samplestd = PGstudent4;
+						if (sam.is_open()) {
+							sam.write((char*)&samplestd, sizeof(samplestd));
+
+						}
+					}
+
+				}
+				else {
+					cout << "Error2" << endl;
+				}
+			} while (!fs.eof());
+
+			fs.close();
+			sam.close();
+			remove("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			rename("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", "D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			break;
+		case 5:
+			cout << "Enter Id to delete " << endl;
+			cin >> searchId;
+			fs.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat", ios::in);
+			sam.open("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", ios::out);
+			do
+			{
+				PGStudent PGstudent4,samplestd;
+				if (fs.is_open()) {
+					fs.read((char*)&PGstudent4, sizeof(PGstudent4));
+					if (PGstudent4.getPersonId() != searchId) {
+						samplestd = PGstudent4;
+						if (sam.is_open()) {
+							sam.write((char*)&samplestd, sizeof(samplestd));
+
+						}
+					}
+					
+				}
+				else {
+					cout << "Error2" << endl;
+				}
+			} while (!fs.eof());
+			
+			fs.close();
+			sam.close();
+			remove("D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			rename("D:\\Users\\snaguman\\Desktop\\C++Projects\\Sample.dat", "D:\\Users\\snaguman\\Desktop\\C++Projects\\Student.dat");
+			break;
